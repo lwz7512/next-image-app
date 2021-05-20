@@ -36,6 +36,11 @@ const Index = () => (
       </p>
       <ul>
         <li>
+          <Link href="/background">
+            <a>background demo</a>
+          </Link>
+        </li>
+        <li>
           <Link href="/layout-intrinsic">
             <a>layout="intrinsic"</a>
           </Link>
@@ -53,11 +58,6 @@ const Index = () => (
         <li>
           <Link href="/layout-fill">
             <a>layout="fill"</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/background">
-            <a>background demo</a>
           </Link>
         </li>
       </ul>

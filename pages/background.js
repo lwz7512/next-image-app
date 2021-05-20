@@ -1,17 +1,15 @@
-import Image from 'next/image'
 import ViewSource from '../components/view-source'
 import { bgWrap, bgText } from '../styles.module.css'
+import ImageWithCover from '../components/image-with-cover'
 
-const Background = () => (
+const Background = ({ imgPlaceHolderStr }) => (
   <div>
     <ViewSource pathname="pages/background.js" />
     <div className={bgWrap}>
-      <Image
-        alt="Mountains"
-        src="/mountains.jpg"
-        layout="fill"
-        objectFit="cover"
-        quality={100}
+      <ImageWithCover
+        coverImgStr={imgPlaceHolderStr}
+        imgSrc="/mountains.jpg"
+        altName="mountains"
       />
     </div>
     <p className={bgText}>
@@ -21,5 +19,20 @@ const Background = () => (
     </p>
   </div>
 )
+
+export async function getStaticProps() {
+
+  const sharp = require('sharp');
+  const buffer = await sharp('./public/mountains.jpg')
+    .resize({width:100}).jpeg({quality: 60}).toBuffer()
+  const base64Str = buffer.toString('base64')
+  const imgData = `data:image/jpg;base64,${base64Str}`
+  
+  return {
+    props: {
+      imgPlaceHolderStr: imgData,
+    }
+  }
+}
 
 export default Background
